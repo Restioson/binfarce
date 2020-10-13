@@ -1,4 +1,5 @@
 #![forbid(unsafe_code)]
+#![cfg_attr(not(feature = "std"), no_std)]
 
 //! Extremely minimal parser for ELF/PE/Mach-o/ar.
 //!
@@ -14,6 +15,8 @@
 
 // I find this more readable
 #![allow(clippy::skip_while_next)]
+
+extern crate alloc;
 
 pub mod ar;
 pub mod demangle;

@@ -1,4 +1,5 @@
-use std::str;
+use core::str;
+use alloc::{string::String, vec::Vec};
 
 use crate::ByteOrder;
 use crate::parser::*;

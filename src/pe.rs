@@ -12,8 +12,9 @@ use crate::demangle::SymbolData;
 use crate::parser::*;
 use crate::ParseError;
 
-use std::ops::Range;
-use std::convert::TryInto;
+use core::ops::Range;
+use core::convert::TryInto;
+use alloc::vec::Vec;
 
 const PE_POINTER_OFFSET: usize = 0x3c;
 const COFF_SYMBOL_SIZE: usize = 18;
@@ -116,7 +117,7 @@ impl Pe<'_> {
             // this slicing operation is infallible, but either clippy or rust-analyzer complain if I just slice
             let name_slice = name.get(0..len).ok_or(ParseError::MalformedInput)?;
             // ignore sections with non-UTF8 names since the spec says they must be UTF-8
-            if let Ok(name_str) = std::str::from_utf8(name_slice) {
+            if let Ok(name_str) = core::str::from_utf8(name_slice) {
                 let section = Section {
                     name: name_str,
                     virtual_size,
@@ -183,7 +184,7 @@ impl Pe<'_> {
     
             let name = if !name.starts_with(&[0, 0, 0, 0]) {
                 let len = name.iter().position(|c| *c == 0).unwrap_or(8);
-                std::str::from_utf8(&name[0..len]).ok()
+                core::str::from_utf8(&name[0..len]).ok()
             } else {
                 let mut s2 = Stream::new(&name[4..], ByteOrder::LittleEndian);
                 let name_offset: u32 = s2.read()?;

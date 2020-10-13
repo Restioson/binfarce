@@ -1,4 +1,6 @@
-use std::{fmt::{Debug, Display}, error::Error};
+use core::fmt::{Debug, Display};
+#[cfg(feature = "std")]
+use std::error::Error;
 
 #[derive(Debug, Copy, Clone)]
 pub enum ParseError {
@@ -6,10 +8,11 @@ pub enum ParseError {
     UnexpectedEof,
 }
 
+#[cfg(feature = "std")]
 impl Error for ParseError {}
 
 impl Display for ParseError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         match self {
             ParseError::MalformedInput => write!(f, "Malformed input file"),
             ParseError::UnexpectedEof => write!(f, "Unexpected end of file"),
@@ -17,8 +20,8 @@ impl Display for ParseError {
     }
 }
 
-impl From<std::num::TryFromIntError> for ParseError {
-    fn from(_: std::num::TryFromIntError) -> Self {
+impl From<core::num::TryFromIntError> for ParseError {
+    fn from(_: core::num::TryFromIntError) -> Self {
         ParseError::MalformedInput
     }
 }

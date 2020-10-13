@@ -1,5 +1,6 @@
-use std::char;
-use std::fmt::{self, Display, Write};
+use core::char;
+use core::fmt::{self, Display, Write};
+use alloc::string::{String, ToString};
 
 /// Representation of a demangled symbol name.
 pub struct Demangle<'a> {

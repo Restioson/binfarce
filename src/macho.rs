@@ -10,8 +10,9 @@ use crate::demangle::SymbolData;
 use crate::parser::*;
 use crate::ParseError;
 
-use std::ops::Range;
-use std::convert::TryInto;
+use core::ops::Range;
+use core::convert::TryInto;
+use alloc::vec::Vec;
 
 const LC_SYMTAB: u32 = 0x2;
 const LC_SEGMENT_64: u32 = 0x19;

@@ -5,7 +5,8 @@
 // Style lints
 #![warn(clippy::cast_lossless)]
 
-use std::{convert::TryInto, ops::Range, mem::size_of};
+use core::{convert::TryInto, ops::Range, mem::size_of};
+use alloc::vec::Vec;
 
 use crate::ByteOrder;
 use crate::demangle::SymbolData;

@@ -9,6 +9,8 @@
 /// - Updated to Rust 2018.
 /// - Ignore LLVM suffixes.
 
+use alloc::string::{String, ToString};
+
 mod legacy;
 mod v0;
 
